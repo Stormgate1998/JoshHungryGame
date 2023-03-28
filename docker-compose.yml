@@ -6,3 +6,48 @@ services:
     build:
       context: .
       dockerfile: HungryGame/Dockerfile
+    environment:
+      - SeqServer=http://seq
+    networks:
+      - hungrynet
+
+  seq:
+    container_name: seq
+    image: datalust/seq:latest
+    ports:
+      - "5341:80"
+    environment:
+      - ACCEPT_EULA=Y
+    networks:
+      - hungrynet
+
+  prometheus:
+    container_name: prometheus
+    image: prom/prometheus:v2.30.3
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml
+      - prom_data:/prometheus
+    ports:
+      - "9090:9090"
+    networks:
+      - hungrynet
+
+  grafana:
+    container_name: grafana
+    image: grafana/grafana:latest
+    ports:
+      - "3001:3001"
+    restart: unless-stopped
+    environment:
+      - GF_SECURITY_ADMIN_USER=admin
+      - GF_SECURITY_ADMIN_PASSWORD=grafana
+    volumes:
+      - ./grafana:/etc/grafana/provisioning/datasources
+    networks:
+      - hungrynet
+
+volumes:
+  prom_data:
+
+networks:
+  hungrynet:

@@ -1,9 +1,22 @@
 using HungryGame;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Caching.Memory;
+using OpenTelemetry;
+using OpenTelemetry.Metrics;
 
 var builder = WebApplication.CreateBuilder(args);
 var requestErrorCount = 0L;
+
+// Enable Prometheus Export
+
+using MeterProvider? meterProvider = Sdk.CreateMeterProviderBuilder()
+    .AddMeter(Counters.meter.Name)
+    .AddPrometheusExporter(o =>
+    {
+        o.StartHttpListener = true;
+        o.HttpListenerPrefixes = new string[] { $"http://localhost:9184/" };
+    })
+    .Build();
 
 // Add services to the container.
 builder.Services.AddRazorPages();
