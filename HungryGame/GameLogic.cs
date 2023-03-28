@@ -230,6 +230,7 @@ public class GameLogic
         }
 
         raiseStateChange();
+        Counters.JoinCounter.Add(1);
         return token;
     }
 
