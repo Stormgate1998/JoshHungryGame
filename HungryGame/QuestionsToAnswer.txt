@@ -1,0 +1,18 @@
+How many times in the last minute did any player move horizontally?
+
+How many times in the last minute did any player move vertically?
+
+When is the state changed? 
+
+How many players have joined this session?
+
+Who won the game? What was their score? (one question)
+
+Number of pills are left
+
+How many times has the game been started?
+
+How many API calls returned an error in the last minute?
+
+
+We worked together on this the whole time.
