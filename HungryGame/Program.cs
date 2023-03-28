@@ -3,11 +3,23 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Caching.Memory;
 using OpenTelemetry;
 using OpenTelemetry.Metrics;
+using OpenTelemetry.Resources;
 
 var builder = WebApplication.CreateBuilder(args);
 var requestErrorCount = 0L;
 
 // Enable Prometheus Export
+var resource = ResourceBuilder.CreateDefault().AddService("HungryGame");
+
+builder.Services.AddOpenTelemetry()
+    .WithMetrics(b =>
+    {
+        b.AddPrometheusExporter();
+        b.AddMeter(Counters.meter.Name);
+        b.SetResourceBuilder(resource);
+        b.AddHttpClientInstrumentation();
+        b.AddAspNetCoreInstrumentation();
+    });
 
 // Add services to the container.
 builder.Services.AddRazorPages();
@@ -115,5 +127,8 @@ app.MapGet("/state", ([FromServices] GameLogic gameLogic, IMemoryCache memoryCac
        return gameLogic.CurrentGameState.ToString();
    });
 });
+
+// Append /metrics to the end
+app.UseOpenTelemetryPrometheusScrapingEndpoint();
 
 app.Run();
