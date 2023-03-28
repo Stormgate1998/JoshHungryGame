@@ -1,18 +1,15 @@
-How many times in the last minute did any player move horizontally?
+How many times in the last minute did any player move horizontally? GameLogic 278-ish
 
-How many times in the last minute did any player move vertically?
+How many times in the last minute did any player move vertically? See above
 
-When is the state changed? 
+When is the state changed? GameLogic 377, 
 
-How many players have joined this session?
+How many players have joined this session? GameLogic 202
 
-Who won the game? What was their score? (one question)
+Who won the game? What was their score? (one question) GameLogic 386
 
-Number of pills are left
+Number of pills are left (HungryGame.Gamelogic line 322, 163)
 
-How many times has the game been started?
+How many times has the game been started? GameLogic 68
 
-How many API calls returned an error in the last minute?
-
-
-We worked together on this the whole time.
+How many API calls returned an error in the last minute? HungryGame Program.cs

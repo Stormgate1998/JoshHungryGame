@@ -158,8 +158,9 @@ public class GameLogic
             for (int i = 1; i <= MaxRows * MaxCols; i++)
             {
                 pillValues.Enqueue(i);
+                
             }
-
+            //pillcounter.Add(pillValues.Count)
             if (players.Count > 20 || pillValues.Count > 10_000)
                 stateChangeFrequency = TimeSpan.FromMilliseconds(750);
             else
@@ -382,6 +383,7 @@ public class GameLogic
         {
             log.LogInformation("Changing game state from {currentGameState} to {newGameState}", CurrentGameState, (CurrentGameState + 1));
             Interlocked.Increment(ref gameStateValue);
+            //Get winner info?
         }
     }
 
