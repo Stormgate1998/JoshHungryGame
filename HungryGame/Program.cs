@@ -15,7 +15,7 @@ builder.Services.AddOpenTelemetry()
     .WithMetrics(b =>
     {
         b.AddPrometheusExporter();
-        b.AddMeter(Counters.meter.Name);
+        b.AddMeter(Counters.HungryMeter.Name);
         b.SetResourceBuilder(resource);
         b.AddHttpClientInstrumentation();
         b.AddAspNetCoreInstrumentation();
@@ -80,6 +80,7 @@ app.MapFallbackToPage("/_Host");
 app.MapGet("/join", (string? userName, string? playerName, GameLogic gameLogic) =>
 {
     var name = userName ?? playerName ?? throw new ArgumentNullException(nameof(userName), "Must define either a userName or playerName in the query string.");
+    Counters.JoinCounter.Add(1);
     return gameLogic.JoinPlayer(name);
 });
 app.MapGet("/move/left", (string token, GameLogic gameLogic) => gameLogic.Move(token, Direction.Left));
