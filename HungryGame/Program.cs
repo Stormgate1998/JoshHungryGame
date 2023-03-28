@@ -98,7 +98,7 @@ app.MapGet("/players", ([FromServices] GameLogic gameLogic, IMemoryCache memoryC
 });
 app.MapGet("/start", (int numRows, int numCols, string password, int? timeLimit, GameLogic gameLogic) =>
 {
-    var gameStart = new NewGameInfo
+   var gameStart = new NewGameInfo
     {
         NumColumns = numCols,
         NumRows = numRows,
