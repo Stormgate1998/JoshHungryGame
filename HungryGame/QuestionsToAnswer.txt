@@ -1,15 +1,13 @@
-How many times in the last minute did any player move horizontally? GameLogic 278-ish
+How many times in the last 5 minutes did any player move horizontally?
 
-How many times in the last minute did any player move vertically? See above
-
-When is the state changed? GameLogic 377, 
-
-How many players have joined this session? GameLogic 202
+How many times in the last 5 minutes did any player move vertically?
 
 Who won the game? What was their score? (one question) GameLogic 386 //Seq log
 
 Number of pills are left (HungryGame.Gamelogic line 322, 163)
-
+https://github.com/Stormgate1998/JoshHungryGame/tree/main/HungryGame
 How many times has the game been started? GameLogic 68
 
 How many API calls returned an error in the last minute? HungryGame Program.cs
+
+When is the state changed? GameLogic 377, 
